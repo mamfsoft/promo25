@@ -7,10 +7,28 @@
 
     <style>
         body {
+
             margin: 0;
-            background: #e8e8e8;
+            padding: 0;
+            background: #dfa876;
             font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+
         }
+
+        /* titulo */
+
+        .neon-text {
+            text-align: center;
+            font-size: 1rem;
+            color: #fff;
+            text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+            animation: glow 1.5s infinite alternate;
+        }
+
+
+
+        /*Contenedor*/
 
         .contenedor {
             position: relative;
@@ -71,6 +89,67 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
+
+        /* Círculo inferior (2cm x 2cm) */
+        .preview {
+            position: fixed;
+            width: 5cm;
+            height: 5cm;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+            opacity: 0;
+
+            transform: translate(-50%, -50%) scale(0.3);
+            transition:
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.25s ease;
+
+            z-index: 9999;
+        }
+
+
+        .preview.activo {
+            opacity: 1;
+        }
+
+        /* BURBUJA TÍTULO (RECTÁNGULO AMARILLO) */
+        .titulo-preview {
+            position: fixed;
+            width: 7cm;
+            height: 2cm;
+            background: rgb(242, 132, 6);
+            border-radius: 12px;
+            padding: 6px;
+            box-sizing: border-box;
+            font-size: 12px;
+            font-weight: bold;
+            color: #050df9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            pointer-events: none;
+            opacity: 0;
+
+            transform: translate(-50%, -50%) scale(0.3);
+            transition:
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.25s ease;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
+
+        .preview.activo,
+        .titulo-preview.activo {
+            opacity: 1;
+        }
+
         /* Animación moderna */
         @keyframes pop {
             from {
@@ -83,11 +162,24 @@
                 transform: translateX(-50%) translateY(0) scale(1);
             }
         }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #f7b211, 0 0 80px #0400ff;
+            }
+
+            100% {
+                text-shadow: 0 0 10px #0713fb, 0 0 160px #ffee00;
+            }
+        }
     </style>
 </head>
 
 <body>
-
+    <div class="neon-container">
+        <h1 class="neon-text">PROMOCIÓN 2025: Tecnología, programación y destreza juntos hacia la grandeza. ¡Adelante
+            Sistemas!</h1>
+    </div>
     <div class="contenedor">
         <img src="foto.png" class="foto">
 
@@ -98,42 +190,173 @@
 
         <!-- FILA INFERIOR (Sentados - Damas) -->
 
-        <div class="punto" style="top: 37%; left: 34%;" data-nombre="Cerezo Cerezo Rita"></div>
-        <div class="punto" style="top: 36%; left: 39.2%;" data-nombre="Patiño Mamani Thais Jhuliana"></div>
-        <div class="punto" style="top: 38%; left: 44%;" data-nombre="Uruchi Triguero Lesly Tamara"></div>
-        <div class="punto" style="top: 38%; left: 49%;" data-nombre="Mamani Monroy Adriana Erika"></div>
-        <div class="punto" style="top: 38%; left: 53.5%;" data-nombre="Quispe Paucara Sarah"></div>
-        <div class="punto" style="top: 37%; left: 58.5%;" data-nombre="Cosme Quispe Yanet"></div>
+        <div class="punto" style="top: 37%; left: 34%;" data-nombre="Cerezo Cerezo Rita" data-foto="fotos/ccr.png"
+            data-titulo="DESARROLLO DE UN SISTEMA WEB DE KARDEX DOCENTE PARA EL INSTITUTO TECNOLÓGICO DON BOSCO">
+        </div>
+        <div class="punto" style="top: 36%; left: 39.2%;" data-nombre="Patiño Mamani Thais Jhuliana"
+            data-foto="fotos/pmtj.png"
+            data-titulo="PLATAFORMA WEB INTELIGENTE PARA LA PUBLICACIÓN DE REQUERIMIENTO DE PASANTES CON SOPORTE ESTUDIANTIL A TRAVES DE CHATBOT INTEGRADO PARA EL INSTITUTO TECNOLÓGICO DON BOSCO">
+        </div>
+        <div class="punto" style="top: 38%; left: 44%;" data-nombre="Uruchi Triguero Lesly Tamara"
+            data-foto="fotos/utlt.png"
+            data-titulo='SISTEMA DE INFORMACIÓN WEB DE ALQUILER DE TRAJES DE DANZA TRADICIONAL PARA EL NEGOCIO "NAYRA BOLIVIA"'>
+        </div>
+        <div class="punto" style="top: 38%; left: 49%;" data-nombre="Mamani Monroy Adriana Erika"
+            data-foto="fotos/mmae1.png"
+            data-titulo="DESARROLLO DE UN SISTEMA WEB PARA EL CONTROL DE PAGOS DE ÁRBITROS DE LA ASOCIACIÓN DE FUTBOL DE LA PAZ (AFLP)">
+        </div>
+        <div class="punto" style="top: 38%; left: 53.5%;" data-nombre="Quispe Paucara Sarah"
+            data-foto="fotos/tyjqps.png" data-x="56" data-y="44"
+            data-titulo="CAPACITACIÓN, PRODUCCIÓN Y VENTA DE KITS DE PROTOTIPOS EDUCATIVOS BASADOS EN ARDUINO Y ESP32">
+        </div>
+        <div class="punto" style="top: 37%; left: 58.5%;" data-nombre="Cosme Quispe Yanet" data-foto="fotos/cqy.png"
+            data-titulo="DESARROLLO DE SISTEMA WEB PARA PROMOCIÓN DE PRODUCTOS ARTESANALES PARA LA ASOCIACIÓN DE ARTESANOS PORVENIR TEXTIL">
+        </div>
 
         <!-- FILA SUPERIOR (Parados - Varones) -->
-        <div class="punto" style="top: 15%; left: 27.5%;" data-nombre="Acarapi Choque Diego"></div>
-        <div class="punto" style="top: 15%; left: 31.5%;" data-nombre="Huanca Leuca Alvaro Eliseo"></div>
-        <div class="punto" style="top: 15%; left: 36%;" data-nombre="Mayta Amaru Denilson Weimar"></div>
-        <div class="punto" style="top: 16%; left: 40%;" data-nombre="Quispe Choquehuanca Cayo Yecid"></div>
-        <div class="punto" style="top: 15%; left: 44%;" data-nombre="Llanos Tapia Lucas Mijael"></div>
-        <div class="punto" style="top: 16%; left: 48%;" data-nombre="Alejo Matos Angel Manuel"></div>
-        <div class="punto" style="top: 16%; left: 52.5%;" data-nombre="Alcon Cachaca Jhoel Bernardo"></div>
-        <div class="punto" style="top: 16%; left: 57%;" data-nombre="Valencia Requena Fabricio Andre"></div>
-        <div class="punto" style="top: 16%; left: 61.5%;" data-nombre="Quispe Ticona Franz Angel"></div>
-        <div class="punto" style="top: 16%; left: 65%;" data-nombre="Marca Sahire Erwin Paul"></div>
-        <div class="punto" style="top: 16%; left: 69.5%;" data-nombre="Oblitas Lastario Brayan Amilcar"></div>
-        <div class="punto" style="top: 16%; left: 74.5%;" data-nombre="Cusi Poma Jhon Jhosep"></div>
+        <div class="punto" style="top: 15%; left: 27.5%;" data-nombre="Acarapi Choque Diego" data-foto="fotos/acd.png"
+            data-titulo='SISTEMA WEB PARA EL CONTROL DE COMPRAS PARA LA PENSION “POLLOS EMANUEL”'>
+        </div>
+        <div class="punto" style="top: 15%; left: 31.5%;" data-nombre="Huanca Leuca Alvaro Eliseo"
+            data-foto="fotos/hlae.png"
+            data-titulo="SISTEMA WEB DE REGISTRO Y SEGUIMIENTO DE PACIENTES PARA LA CLÍNICA ODONTOLÓGICA ODONTORED BOLIVIA">
+        </div>
+        <div class="punto" style="top: 15%; left: 36%;" data-nombre="Mayta Amaru Denilson Weimar"
+            data-foto="fotos/madw.png"
+            data-titulo="SISTEMA WEB DE SEGUIMIENTO A TITULADOS EN LA CARRERA DE SISTEMAS INFORMÁTICOS EN EL INSTITUTO TECNOLÓGICO DON BOSCO EL ALTO">
+        </div>
+        <div class="punto" style="top: 16%; left: 40%;" data-nombre="Quispe Choquehuanca Cayo Yecid"
+            data-foto="fotos/qccy.png"
+            data-titulo="APLICACIÓN MÓVIL PARA EL REGISTRO DE PUNTUACIÓN DE COMPETENCIAS DE TAEKWONDO CASO: ASOCIACIÓN MUNICIPAL DE TAEKWONDO DE EL ALTO">
+        </div>
+        <div class="punto" style="top: 15%; left: 44%;" data-nombre="Llanos Tapia Lucas Mijael"
+            data-foto="fotos/ltlm.png"
+            data-titulo="SISTEMA DE REGISTRO DE HUÉSPEDES PARA EL ÁREA ADMINISTRATIVA DEL HOTEL CHASQUI DEL SOL EN COPACABANA">
+        </div>
+        <div class="punto" style="top: 16%; left: 48%;" data-nombre="Alejo Matos Angel Manuel"
+            data-foto="fotos/amam.png"
+            data-titulo="SISTEMA DE CONTROL DE PERSONAL DE LIMPIEZA PARA EL HOTEL CHASQUI DEL SOL"></div>
+        <div class="punto" style="top: 16%; left: 52.5%;" data-nombre="Alcon Cachaca Jhoel Bernardo"
+            data-foto="fotos/acjb.png"
+            data-titulo="APLICACIÓN MÓVIL PARA LA PROMOCIÓN DE MUSEOS EN LA PAZ Y EL ALTO CON LOCALIZACIÓN GEOGRÁFICA E INTERACTIVIDAD">
+        </div>
+        <div class="punto" style="top: 16%; left: 57%;" data-nombre="Valencia Requena Fabricio Andre"
+            data-foto="fotos/padg.png" data-titulo="MODALIDAD DE GRADUACIÓN SELECCIONADA POR EL POSTULANTE"></div>
+        <div class="punto" style="top: 16%; left: 61.5%;" data-nombre="Quispe Ticona Franz Angel"
+            data-foto="fotos/qtfa.png"
+            data-titulo="EXCELENCIA ACADÉMICA: PROMEDIO SUPERIOR AL 90% EN LOS TRES AÑOS DE ESTUDIO"></div>
+        <div class="punto" style="top: 16%; left: 65%;" data-nombre="Marca Sahire Erwin Paul" data-foto="fotos/padg.png"
+            data-titulo="MODALIDAD DE GRADUACIÓN SELECCIONADA POR EL POSTULANTE"></div>
+        <div class="punto" style="top: 16%; left: 69.5%;" data-nombre="Oblitas Lastario Brayan Amilcar"
+            data-foto="fotos/olba.png"
+            data-titulo="PANEL INFORMATIVO DIGITAL PARA LA CARRERA DE SISTEMAS INFORMÁTICOS EN EL INSTITUTO TECNOLÓGICO DON BOSCO">
+        </div>
+        <div class="punto" style="top: 16%; left: 74.5%;" data-nombre="Cusi Poma Jhon Jhosep" data-foto="fotos/cpjj.png"
+            data-titulo='SISTEMA DE INFORMACIÓN WEB PARA GESTIÓN DE PEDIDOS E INVENTARIO PARA LA CARNICERÍA "MRPORKY"'>
+        </div>
 
         <!-- EXTREMO DERECHO (Parados - Varones) -->
-        <div class="punto" style="top: 27%; left: 65%;" data-nombre="Castro Lima Cristian"></div>
-        <div class="punto" style="top: 27%; left: 72%;" data-nombre="Choque Beltran Fabian Jesus"></div>
-        <div class="punto" style="top: 29%; left: 77%;" data-nombre="Kauna Limachi Fabricio Santini"></div>
-        <div class="punto" style="top: 28%; left: 84.5%;" data-nombre="Yapu Ramirez Marcos Ever"></div>
-        <div class="punto" style="top: 30%; left: 91.2%;" data-nombre="Montes Limachi Miguel Angel"></div>
+        <div class="punto" style="top: 27%; left: 65%;" data-nombre="Castro Lima Cristian" data-foto="fotos/clc.png"
+            data-titulo="AUTOMATIZACION DE UNA MÁQUINA PARA EQUIPOS DE PRUEBAS DE RESISTENCIA DE METALES">
+        </div>
+        <div class="punto" style="top: 27%; left: 72%;" data-nombre="Choque Beltran Fabian Jesus"
+            data-foto="fotos/cbfj.png"
+            data-titulo="SISTEMA DE CONTROL DE ASISTENCIA Y DISCIPLINA ESTUDIANTIL PARA LA U.E. MARIEN GARTEN A"></div>
+        <div class="punto" style="top: 29%; left: 77%;" data-nombre="Kauna Limachi Fabricio Santini"
+            data-foto="fotos/klfsmlma.png"
+            data-titulo="CENTRO DE CAPACITACIÓN DE HARDWARE Y SOFTWARE PARA PERSONAS CON DISCAPACIDAD VISUAL EN BOLIVIA">
+        </div>
+        <div class="punto" style="top: 28%; left: 84.5%;" data-nombre="Yapu Ramirez Marcos Ever"
+            data-foto="fotos/yrme.png"
+            data-titulo='DESARROLLO DE UNA PLATAFORMA WEB PUBLICITARIA CON SISTEMA DE REGISTRO DE POSTULANTES PARA LA “AUTOESCUELA IBEROAMERICANA"'>
+        </div>
+        <div class="punto" style="top: 30%; left: 91.2%;" data-nombre="Montes Limachi Miguel Angel"
+            data-foto="fotos/klfsmlma.png"
+            data-titulo="CENTRO DE CAPACITACIÓN DE HARDWARE Y SOFTWARE PARA PERSONAS CON DISCAPACIDAD VISUAL EN BOLIVIA">
+        </div>
 
         <!-- EXTREMO IZQUIERDO (Parados - Varones)-->
-        <div class="punto" style="top: 27%; left: 5%;" data-nombre="Aruquipa Flores Jonatan"></div>
-        <div class="punto" style="top: 29%; left: 12%;" data-nombre="Titto Yampa Jose"></div>
-        <div class="punto" style="top: 25%; left: 17.8%;" data-nombre="Taborga Alegría Jimmy"></div>
-        <div class="punto" style="top: 27%; left: 22.5%;" data-nombre="Niura Calle Alvaro"></div>
-        <div class="punto" style="top: 28%; left: 27.5%;" data-nombre="Sanchez Quisbert Cristhian Jesus"></div>
+        <div class="punto" style="top: 27%; left: 5%;" data-nombre="Aruquipa Flores Jonatan" data-foto="fotos/afj.png"
+            data-titulo="APLICACIÓN MÓVIL PARA ESCOGER UN CORTE O PEINADO DE CABELLO">
+        </div>
+        <div class="punto" style="top: 29%; left: 12%;" data-nombre="Titto Yampa Jose" data-foto="fotos/tyjqps.png"
+            data-titulo="CAPACITACIÓN, PRODUCCIÓN Y VENTA DE KITS DE PROTOTIPOS EDUCATIVOS BASADOS EN ARDUINO Y ESP32">
+        </div>
+        <div class="punto" style="top: 25%; left: 17.8%;" data-nombre="Taborga Alegría Jimmy" data-foto="fotos/taj.png"
+            data-titulo='SISTEMA WEB PARA LA GESTIÓN DE PACIENTES, HISTORIAL CLÍNICO Y CITAS EN EL CONSULTORIO PSICOLÓGICO “ESCUELA DE LA FAMILIA"'>
+        </div>
+        <div class="punto" style="top: 27%; left: 22.5%;" data-nombre="Niura Calle Alvaro" data-foto="fotos/nca.png"
+            data-titulo="EXCELENCIA ACADÉMICA: PROMEDIO SUPERIOR AL 90% EN LOS TRES AÑOS DE ESTUDIO">
+        </div>
+        <div class="punto" style="top: 28%; left: 27.5%;" data-nombre="Sanchez Quisbert Cristhian Jesus"
+            data-foto="fotos/sqcj.png"
+            data-titulo='SISTEMA WEB PARA CONTROL DE VENTAS DE REPUESTOS DE AUTOS CASO DE ESTUDIO: “MEGA"'></div>
 
     </div>
+    <!-- CÍRCULO INFERIOR -->
+    <div id="preview" class="preview"></div>
+    <div id="tituloPreview" class="titulo-preview"></div>
+
+    <script>
+        const puntos = document.querySelectorAll('.punto');
+        const preview = document.getElementById('preview');
+        const titulo = document.getElementById('tituloPreview');
+
+        puntos.forEach(punto => {
+            punto.addEventListener('mouseenter', () => {
+
+                const img = punto.dataset.foto;
+                const tituloTexto = punto.dataset.titulo;
+
+                const rect = punto.getBoundingClientRect();
+
+                // Posición inicial (rostro)
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height / 2;
+
+                // Posición final (centro inferior)
+                const endX = window.innerWidth / 2;
+                const endY = window.innerHeight - 80;
+
+                preview.style.backgroundImage = `url('${img}')`;
+                preview.style.left = `${startX}px`;
+                preview.style.top = `${startY}px`;
+
+                titulo.textContent = tituloTexto;
+                titulo.style.left = `${startX}px`;
+                titulo.style.top = `${startY}px`;
+
+                // Forzar reflow
+                preview.getBoundingClientRect();
+
+                // Activar animación
+                preview.style.opacity = "1";
+                titulo.style.opacity = "1";
+
+                preview.style.transform = `
+                translate(-50%, -50%)
+                translate(${endX - startX}px, ${endY - startY}px)
+                scale(1)
+            `;
+
+                titulo.style.transform = `
+                translate(-50%, -50%)
+                translate(${(endX - startX) + 190}px, ${endY - startY}px)
+                scale(1)
+            `;
+            });
+
+            punto.addEventListener('mouseleave', () => {
+                preview.style.opacity = "0";
+                titulo.style.opacity = "0";
+
+                preview.style.transform = "translate(-50%, -50%) scale(0.3)";
+                titulo.style.transform = "translate(-50%, -50%) scale(0.3)";
+            });
+        });
+    </script>
+
+
 
 </body>
 

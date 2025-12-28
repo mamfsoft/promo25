@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Identificación de Estudiantes</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #e8e8e8;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            position: relative;
+            width: 100%;
+            max-width: 1800px;
+            margin: auto;
+        }
+
+        .foto {
+            width: 100%;
+            display: block;
+        }
+
+        /* Círculos invisibles sobre los rostros */
+        .punto {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: rgba(255, 0, 0, 0.0);
+            /* invisible */
+        }
+
+        /* Tooltip moderno */
+        .punto:hover::after {
+            content: attr(data-nombre);
+            position: absolute;
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(242, 210, 6, 0.4);
+            backdrop-filter: blur(8px);
+            color: #0415fa;
+            padding: 10px 18px;
+            border-radius: 12px;
+            white-space: nowrap;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            animation: pop 0.25s ease-out forwards;
+            z-index: 999;
+        }
+
+        /* Flecha del tooltip */
+        .punto:hover::before {
+            content: "";
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 28px;
+            background: rgba(242, 210, 6, 0.4);
+            backdrop-filter: blur(8px);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animación moderna */
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+
+        /* Círculo inferior (2cm x 2cm) */
+        .preview {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(100%);
+            width: 4cm;
+            height: 4cm;
+            border-radius: 50%;
+            background-image: url("foto.png");
+            background-repeat: no-repeat;
+            background-size: 3600px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            border: 3px solid #fff;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 9999;
+        }
+
+        .preview.activo {
+            opacity: 1;
+        }
+
+        /* BURBUJA TÍTULO (RECTÁNGULO AMARILLO) */
+        .titulo-preview {
+            position: fixed;
+            bottom: 25px;
+            left: calc(50% + 2.2cm);
+            width: 3cm;
+            height: 2cm;
+            background: #FFD700;
+            border-radius: 12px;
+            padding: 6px;
+            box-sizing: border-box;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
+
+        .preview.activo,
+        .titulo-preview.activo {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <img src="foto.png" class="foto">
+
+        <!-- =============================
+         PUNTOS (EJEMPLO)
+         Ajusta las posiciones (top/left)
+         ============================= -->
+
+        <!-- FILA INFERIOR (Sentados - Damas) -->
+
+        <div class="punto" style="top: 37%; left: 34%;" data-nombre="Cerezo Cerezo Rita" data-x="36" data-y="42"
+            data-titulo="Título">
+        </div>
+        <div class="punto" style="top: 36%; left: 39.2%;" data-nombre="Patiño Mamani Thais Jhuliana" data-x="41.2"
+            data-y="41" data-titulo="Título"></div>
+        <div class="punto" style="top: 38%; left: 44%;" data-nombre="Uruchi Triguero Lesly Tamara" data-x="46"
+            data-y="43" data-titulo="Título"></div>
+        <div class="punto" style="top: 38%; left: 49%;" data-nombre="Mamani Monroy Adriana Erika" data-x="51.2"
+            data-y="43" data-titulo="Título"></div>
+        <div class="punto" style="top: 38%; left: 53.5%;" data-nombre="Quispe Paucara Sarah" data-x="56" data-y="44"
+            data-titulo="Título">
+        </div>
+        <div class="punto" style="top: 37%; left: 58.5%;" data-nombre="Cosme Quispe Yanet" data-x="37" data-y="34"
+            data-titulo="Título">
+        </div>
+
+        <!-- FILA SUPERIOR (Parados - Varones) -->
+        <div class="punto" style="top: 15%; left: 27.5%;" data-nombre="Acarapi Choque Diego"></div>
+        <div class="punto" style="top: 15%; left: 31.5%;" data-nombre="Huanca Leuca Alvaro Eliseo"></div>
+        <div class="punto" style="top: 15%; left: 36%;" data-nombre="Mayta Amaru Denilson Weimar"></div>
+        <div class="punto" style="top: 16%; left: 40%;" data-nombre="Quispe Choquehuanca Cayo Yecid"></div>
+        <div class="punto" style="top: 15%; left: 44%;" data-nombre="Llanos Tapia Lucas Mijael"></div>
+        <div class="punto" style="top: 16%; left: 48%;" data-nombre="Alejo Matos Angel Manuel"></div>
+        <div class="punto" style="top: 16%; left: 52.5%;" data-nombre="Alcon Cachaca Jhoel Bernardo"></div>
+        <div class="punto" style="top: 16%; left: 57%;" data-nombre="Valencia Requena Fabricio Andre"></div>
+        <div class="punto" style="top: 16%; left: 61.5%;" data-nombre="Quispe Ticona Franz Angel"></div>
+        <div class="punto" style="top: 16%; left: 65%;" data-nombre="Marca Sahire Erwin Paul"></div>
+        <div class="punto" style="top: 16%; left: 69.5%;" data-nombre="Oblitas Lastario Brayan Amilcar"></div>
+        <div class="punto" style="top: 16%; left: 74.5%;" data-nombre="Cusi Poma Jhon Jhosep"></div>
+
+        <!-- EXTREMO DERECHO (Parados - Varones) -->
+        <div class="punto" style="top: 27%; left: 65%;" data-nombre="Castro Lima Cristian"></div>
+        <div class="punto" style="top: 27%; left: 72%;" data-nombre="Choque Beltran Fabian Jesus"></div>
+        <div class="punto" style="top: 29%; left: 77%;" data-nombre="Kauna Limachi Fabricio Santini"></div>
+        <div class="punto" style="top: 28%; left: 84.5%;" data-nombre="Yapu Ramirez Marcos Ever"></div>
+        <div class="punto" style="top: 30%; left: 91.2%;" data-nombre="Montes Limachi Miguel Angel"></div>
+
+        <!-- EXTREMO IZQUIERDO (Parados - Varones)-->
+        <div class="punto" style="top: 27%; left: 5%;" data-nombre="Aruquipa Flores Jonatan"></div>
+        <div class="punto" style="top: 29%; left: 12%;" data-nombre="Titto Yampa Jose"></div>
+        <div class="punto" style="top: 25%; left: 17.8%;" data-nombre="Taborga Alegría Jimmy"></div>
+        <div class="punto" style="top: 27%; left: 22.5%;" data-nombre="Niura Calle Alvaro"></div>
+        <div class="punto" style="top: 28%; left: 27.5%;" data-nombre="Sanchez Quisbert Cristhian Jesus"></div>
+
+    </div>
+    <!-- CÍRCULO INFERIOR -->
+    <div id="preview" class="preview"></div>
+    <div id="tituloPreview" class="titulo-preview"></div>
+
+    <script>
+        const puntos = document.querySelectorAll('.punto');
+        const preview = document.getElementById('preview');
+        const titulo = document.getElementById('tituloPreview');
+
+        puntos.forEach(punto => {
+            punto.addEventListener('mouseenter', () => {
+                const x = punto.dataset.x;
+                const y = punto.dataset.y;
+                const tituloTexto = punto.dataset.titulo;
+
+                preview.style.backgroundPosition = `${x}% ${y}%`;
+                preview.classList.add('activo');
+
+                titulo.textContent = tituloTexto;
+                titulo.classList.add('activo');
+            });
+
+            punto.addEventListener('mouseleave', () => {
+                preview.classList.remove('activo');
+                titulo.classList.remove('activo');
+            });
+        });
+    </script>
+</body>
+
+</html>
